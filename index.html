@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Should I Masturbate?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1e1e1e;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px #ff4081;
+            width: 90%;
+            max-width: 400px;
+        }
+        button {
+            background: #ff4081;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #e03574;
+        }
+        #result {
+            margin-top: 30px;
+            font-size: 2rem;
+            min-height: 2.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Should I Masturbate?</h1>
+        <button id="askButton">Ask the Wheel</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const results = ["YES", "NO"];
+        document.getElementById('askButton').addEventListener('click', () => {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = "Thinking...";
+            setTimeout(() => {
+                const choice = results[Math.floor(Math.random() * results.length)];
+                resultDiv.textContent = choice;
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
