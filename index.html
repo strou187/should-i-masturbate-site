@@ -1,68 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Should I Masturbate?</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #1e1e1e;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-        }
-        .container {
-            background: #2a2a2a;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 0 20px #ff4081;
-            width: 90%;
-            max-width: 400px;
-        }
-        button {
-            background: #ff4081;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: background 0.3s ease;
-        }
-        button:hover {
-            background: #e03574;
-        }
-        #result {
-            margin-top: 30px;
-            font-size: 2rem;
-            min-height: 2.5em;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Should I Masturbate?</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #fff;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    .hidden { display: none; }
+    #splash, #main, #spinner-section { padding: 20px; }
+    button {
+      font-size: 1.5rem;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      background: #222;
+      color: white;
+      cursor: pointer;
+    }
+    #response {
+      margin: 20px 0;
+      font-size: 2rem;
+    }
+    #wheel {
+      margin-top: 30px;
+      border: 5px solid #333;
+      border-radius: 50%;
+      width: 300px;
+      height: 300px;
+      position: relative;
+    }
+    .segment {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      top: 50%;
+      left: 50%;
+      transform-origin: 0% 0%;
+      background: #f1c40f;
+      color: #111;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Should I Masturbate?</h1>
-        <button id="askButton">Ask the Wheel</button>
-        <div id="result"></div>
-    </div>
+  <div id="splash">
+    <h1>Are you 18 or older?</h1>
+    <button onclick="enterSite(true)">Yes</button>
+    <button onclick="enterSite(false)">No</button>
+  </div>
 
-    <script>
-        const results = ["YES", "NO"];
-        document.getElementById('askButton').addEventListener('click', () => {
-            const resultDiv = document.getElementById('result');
-            resultDiv.textContent = "Thinking...";
-            setTimeout(() => {
-                const choice = results[Math.floor(Math.random() * results.length)];
-                resultDiv.textContent = choice;
-            }, 1000);
-        });
-    </script>
+  <div id="main" class="hidden">
+    <h1>Should I Masturbate?</h1>
+    <button onclick="decide()">Press Me</button>
+    <div id="response"></div>
+    <div id="spinner-section" class="hidden">
+      <h2>Spin the Wheel of Fate</h2>
+      <button onclick="spinWheel()">Spin</button>
+      <div id="wheel"></div>
+      <p id="category-result"></p>
+    </div>
+  </div>
+
+  <script>
+    const responses = ["Yes", "No", "Absolutely Not", "Yes, but don't make it weird", "Try again later"];
+    const categories = [
+      "That thing you swore you'd never watch again",
+      "Aliens. Don't ask.",
+      "Pure guilt",
+      "Whatever’s trending",
+      "Your weird kink that you think is normal",
+      "Vintage VHS energy",
+      "Anime again? Really?",
+      "Whatever loads first"
+    ];
+
+    function enterSite(allowed) {
+      document.getElementById('splash').style.display = 'none';
+      if (allowed) {
+        document.getElementById('main').classList.remove('hidden');
+      } else {
+        document.body.innerHTML = '<h1>Come back when you're old enough.</h1>';
+      }
+    }
+
+    function decide() {
+      const answer = responses[Math.floor(Math.random() * responses.length)];
+      document.getElementById('response').textContent = answer;
+      if (answer.toLowerCase().includes('yes')) {
+        document.getElementById('spinner-section').classList.remove('hidden');
+      } else {
+        document.getElementById('spinner-section').classList.add('hidden');
+      }
+    }
+
+    function spinWheel() {
+      const result = categories[Math.floor(Math.random() * categories.length)];
+      document.getElementById('category-result').textContent = `Your destiny: ${result}`;
+    }
+  </script>
 </body>
 </html>
+
